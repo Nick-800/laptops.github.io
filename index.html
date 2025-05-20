@@ -23,32 +23,35 @@
     <span class="loading">Loading price...</span>
   </div>
 
-  <script>
-   ```
-// Replace this URL with your actual API endpoint to get product price
-    const priceApiUrl = 'https://script.google.com/macros/s/AKfycbz8Zop-3ySSRWp8PT1aR-gU_FaHuCxeErDo8B4Z0Jl9SotvWkkcKtBojVqMzzQo9P61/exec?code=A0247';
+<script>
+  // Replace this URL with your actual API endpoint to get product price
+  const priceApiUrl = 'https://script.google.com/macros/s/AKfycbz8Zop-3ySSRWp8PT1aR-gU_FaHuCxeErDo8B4Z0Jl9SotvWkkcKtBojVqMzzQo9P61/exec?code=A0247';
 
-    async function fetchPrice() {
-      try {
-        const response = await fetch(priceApiUrl);
-        if (!response.ok) throw new Error('Network response was not ok');
-        const data = await response.json();
-        const price = data.price;
-        if (typeof price !== 'number') {
-          throw new Error('Invalid price format');
-        }
-        const priceContainer = document.getElementById('price-container');
-        priceContainer.textContent = `$${price.toFixed(2)}`;
-      } catch (error) {
-        const priceContainer = document.getElementById('price-container');
-        priceContainer.textContent = 'Price unavailable';
-        console.error('Error fetching price:', error);
+  async function fetchPrice() {
+    try {
+      const response = await fetch(priceApiUrl);
+      console.log('Response status:', response.status); // Log the response status
+      if (!response.ok) throw new Error('Network response was not ok');
+
+      const data = await response.json();
+      console.log('Response data:', data); // Log the response data
+
+      const price = data.price;
+      if (typeof price !== 'number') {
+        throw new Error('Invalid price format');
       }
-    }
 
-    fetchPrice();
-```
-  </script>
+      const priceContainer = document.getElementById('price-container');
+      priceContainer.textContent = `$${price.toFixed(2)}`;
+    } catch (error) {
+      const priceContainer = document.getElementById('price-container');
+      priceContainer.textContent = 'Price unavailable';
+      console.error('Error fetching price:', error);
+    }
+  }
+
+  fetchPrice();
+</script>
 </body>
 </html>
 ```
