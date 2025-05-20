@@ -1,0 +1,54 @@
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Product Showcase</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <h1>Our Amazing Product</h1>
+  <div class="product-images">
+    <img src="product1.jpg" alt="Product Image 1" />
+    <img src="product2.jpg" alt="Product Image 2" />
+    <img src="product3.jpg" alt="Product Image 3" />
+  </div>
+
+  <div class="specs-container">
+    <img src="specs.jpg" alt="Product Specifications" />
+  </div>
+
+  <div class="price-container" id="price-container">
+    <span class="loading">Loading price...</span>
+  </div>
+
+  <script>
+   ```
+// Replace this URL with your actual API endpoint to get product price
+    const priceApiUrl = 'https://script.google.com/macros/s/AKfycbz8Zop-3ySSRWp8PT1aR-gU_FaHuCxeErDo8B4Z0Jl9SotvWkkcKtBojVqMzzQo9P61/exec?code=A0247';
+
+    async function fetchPrice() {
+      try {
+        const response = await fetch(priceApiUrl);
+        if (!response.ok) throw new Error('Network response was not ok');
+        const data = await response.json();
+        const price = data.price;
+        if (typeof price !== 'number') {
+          throw new Error('Invalid price format');
+        }
+        const priceContainer = document.getElementById('price-container');
+        priceContainer.textContent = `$${price.toFixed(2)}`;
+      } catch (error) {
+        const priceContainer = document.getElementById('price-container');
+        priceContainer.textContent = 'Price unavailable';
+        console.error('Error fetching price:', error);
+      }
+    }
+
+    fetchPrice();
+```
+  </script>
+</body>
+</html>
+```
