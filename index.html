@@ -9,49 +9,75 @@
 </head>
 <body>
   <h1>Our Amazing Product</h1>
-  <div class="product-images">
-    <img src="product1.jpg" alt="Product Image 1" />
-    <img src="product2.jpg" alt="Product Image 2" />
-    <img src="product3.jpg" alt="Product Image 3" />
+  <div class="product-images" id="product-images">
+    <!-- Images will be populated here dynamically -->
   </div>
 
-  <div class="specs-container">
-    <img src="specs.jpg" alt="Product Specifications" />
+  <div class="specs-container" id="specs-container">
+    <!-- Specifications image will be populated here dynamically -->
   </div>
 
   <div class="price-container" id="price-container">
     <span class="loading">Loading price...</span>
   </div>
 
-<script>
-  // Replace this URL with your actual API endpoint to get product price
-  const priceApiUrl = 'https://script.google.com/macros/s/AKfycbz8Zop-3ySSRWp8PT1aR-gU_FaHuCxeErDo8B4Z0Jl9SotvWkkcKtBojVqMzzQo9P61/exec?code=A0247';
+  <script>
+    // Function to get URL parameters
+    function getUrlParameter(name) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(name);
+    }
 
-  async function fetchPrice() {
-    try {
-      const response = await fetch(priceApiUrl);
-      console.log('Response status:', response.status); // Log the response status
-      if (!response.ok) throw new Error('Network response was not ok');
+    const code = getUrlParameter('code'); // Get the code from the URL
+    const imageBasePath = 'pics/'; // Base path for images
 
-      const data = await response.json();
-      console.log('Response data:', data); // Log the response data
+    // Function to fetch images dynamically
+    function loadImages() {
+      const productImagesContainer = document.getElementById('product-images');
+      const specsContainer = document.getElementById('specs-container');
 
-      const price = data.price;
-      if (typeof price !== 'number') {
-        throw new Error('Invalid price format');
+      // Assuming the images are named as code_1.jpg, code_2.jpg, etc.
+      for (let i = 1; i <= 3; i++) {
+        const img = document.createElement('img');
+        img.src = `${imageBasePath}${code}_${i}.jpg`; // Construct image path
+        img.alt = `Product Image ${i}`;
+        productImagesContainer.appendChild(img);
       }
 
-      const priceContainer = document.getElementById('price-container');
-      priceContainer.textContent = `${price.toFixed(2)}`;
-    } catch (error) {
-      const priceContainer = document.getElementById('price-container');
-      priceContainer.textContent = 'Price unavailable';
-      console.error('Error fetching price:', error);
+      // Assuming the specs image is named as code_specs.jpg
+      const specsImg = document.createElement('img');
+      specsImg.src = `${imageBasePath}${code}_specs.jpg`; // Construct specs image path
+      specsImg.alt = 'Product Specifications';
+      specsContainer.appendChild(specsImg);
     }
-  }
 
-  fetchPrice();
-</script>
+    // Function to fetch price using the code
+    async function fetchPrice() {
+      const priceApiUrl = `https://script.google.com/macros/s/AKfycbz8Zop-3ySSRWp8PT1aR-gU_FaHuCxeErDo8B4Z0Jl9SotvWkkcKtBojVqMzzQo9P61/exec?code=${code}`;
+
+      try {
+        const response = await fetch(priceApiUrl);
+        if (!response.ok) throw new Error('Network response was not ok');
+
+        const data = await response.json();
+        const price = data.price;
+        if (typeof price !== 'number') {
+          throw new Error('Invalid price format');
+        }
+
+        const priceContainer = document.getElementById('price-container');
+        priceContainer.textContent = `${price.toFixed(2)}`;
+      } catch (error) {
+        const priceContainer = document.getElementById('price-container');
+        priceContainer.textContent = 'Price unavailable';
+        console.error('Error fetching price:', error);
+      }
+    }
+
+    // Load images and fetch price
+    loadImages();
+    fetchPrice();
+  </script>
 </body>
 </html>
 ```
