@@ -29,27 +29,30 @@
     }
 
     const code = getUrlParameter('code'); // Get the code from the URL
-    const imageBasePath = 'pics/'; // Base path for images
+    const productImageBasePath = `pics/product pics/${code}/`; // Base path for product images
+    const specsImageBasePath = `pics/specs/${code}.jpg`; // Path for specs image
+ // Base path for images
 
     // Function to fetch images dynamically
-    function loadImages() {
-      const productImagesContainer = document.getElementById('product-images');
-      const specsContainer = document.getElementById('specs-container');
+ function loadImages() {
+    const productImagesContainer = document.getElementById('product-images');
+    const specsContainer = document.getElementById('specs-container');
 
-      // Assuming the images are named as code_1.jpg, code_2.jpg, etc.
-      for (let i = 1; i <= 3; i++) {
-        const img = document.createElement('img');
-        img.src = `${imageBasePath}${code}_${i}.jpg`; // Construct image path
-        img.alt = `Product Image ${i}`;
-        productImagesContainer.appendChild(img);
-      }
-
-      // Assuming the specs image is named as code_specs.jpg
-      const specsImg = document.createElement('img');
-      specsImg.src = `${imageBasePath}${code}_specs.jpg`; // Construct specs image path
-      specsImg.alt = 'Product Specifications';
-      specsContainer.appendChild(specsImg);
+    // Load product images
+    for (let i = 1; i <= 3; i++) {
+      const img = document.createElement('img');
+      img.src = `${productImageBasePath}${i}.jpg`; // Construct image path
+      img.alt = `Product Image ${i}`;
+      productImagesContainer.appendChild(img);
     }
+
+    // Load specs image
+    const specsImg = document.createElement('img');
+    specsImg.src = specsImageBasePath; // Use the constructed specs image path
+    specsImg.alt = 'Product Specifications';
+    specsContainer.appendChild(specsImg);
+  }
+
 
     // Function to fetch price using the code
     async function fetchPrice() {
