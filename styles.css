@@ -35,7 +35,7 @@ h1 {
   overflow: hidden; /* Ensure rounded corners are applied */
   width: 100%; /* Full width of the container */
   max-width: 600px; /* Set a max width for the container */
-  margin: 0 auto; /* Center the container */
+  margin: 2px auto; /* Center the container */
 }
 .specs-container img {
   max-width: 100%; /* Make the image responsive */
