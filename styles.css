@@ -33,14 +33,14 @@ h1 {
   text-align: center;
   margin-bottom: 20px;
   overflow: hidden; /* Ensure rounded corners are applied */
-  width: 95%; /* Full width of the container */
+  width: 100%; /* Full width of the container */
   max-width: 600px; /* Set a max width for the container */
   margin: 0 auto; /* Center the container */
 }
 .specs-container img {
   max-width: 100%; /* Make the image responsive */
   height: auto; /* Maintain aspect ratio */
-  width: 100%; /* Set the image to fill the container */
+  width: 90%; /* Set the image to fill the container */
   border: 2px solid #ccc; /* Add a border */
   border-radius: 16px; /* Increase rounded corners */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
