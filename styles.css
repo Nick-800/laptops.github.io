@@ -33,7 +33,7 @@ h1 {
   text-align: center;
   margin-bottom: 20px;
   overflow: hidden; /* Ensure rounded corners are applied */
-  width: 100%; /* Full width of the container */
+  width: 95%; /* Full width of the container */
   max-width: 600px; /* Set a max width for the container */
   margin: 0 auto; /* Center the container */
 }
