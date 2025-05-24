@@ -35,8 +35,8 @@ h1 {
 }
 
 .specs-container img{
-  max-width: 15%; /* Make the image responsive */
-  height: 15px; /* Maintain aspect ratio */
+  max-width: 100%; /* Make the image responsive */
+  height: auto; /* Maintain aspect ratio */
   width: 80px; /* Set a fixed width for the specs image */
   border: 2px solid #ccc; /* Add a border */
   border-radius: 8px; /* Rounded corners */
