@@ -32,6 +32,9 @@ h1 {
 .specs-container {
   text-align: center;
   margin-bottom: 20px; 
+}
+
+.specs-container img{
   max-width: 15%; /* Make the image responsive */
   height: 15px; /* Maintain aspect ratio */
   width: 80px; /* Set a fixed width for the specs image */
